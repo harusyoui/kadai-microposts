@@ -15,7 +15,16 @@ class CreateUserFollowTable extends Migration
     {
         Schema::create('user_follow', function (Blueprint $table) {
             $table->increments('id');
+            $table->integer('user_id')->unsigned()->index();
+            $table->integer('follow_id')->unsigned()->index();
             $table->timestamps();
+            
+            // 外部キー設定
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->foreign('follow_id')->references('id')->on('users')->onDelete('cascade');
+           
+            // user_idとfollow_idの組み合わせの重複を許さない
+            $table->unique(['user_id','follow_id']);
         });
     }
 

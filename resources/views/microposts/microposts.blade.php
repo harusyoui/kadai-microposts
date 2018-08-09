@@ -7,7 +7,7 @@
             </div>
             <div class="media-body">
                 <div>
-                    {!! link_to_route('users.show','$user->name',['id' => $user->id]) !!}<span class="text-muted">posted at {{ $micropost->created_at }}</span>
+                    {!! link_to_route('users.show',$user->name,['id' => $user->id]) !!}<span class="text-muted">posted at {{ $micropost->created_at }}</span>
                 </div>
                 <div>
                     <p>{!! nl2br(e($micropost->content)) !!}</p>

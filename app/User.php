@@ -50,7 +50,7 @@ class User extends Authenticatable
         $its_me = $this->id == $userId;
         
         if($exist && !$its_me){
-            $this->followings()->attach($userId);
+            $this->followings()->detach($userId);
             return true;
         }else{
             return false;

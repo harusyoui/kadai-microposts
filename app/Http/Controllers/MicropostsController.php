@@ -25,6 +25,23 @@ class MicropostsController extends Controller
         }
     }
     
+    public function favorite(){
+        $data =[];
+        if(\Auth::check()){
+            $user = \Auth::user();
+            $favorits = $user->favorite_microposts()->orderBy('created_at','desc')->paginate(10);
+            
+            $data = [
+                'user' => $user,
+                'favorits' => $favorits
+            ];
+            $data += $this->counts($user);
+            return view('users.favoritings',$data);
+        }else{
+            return view('welcome');
+        }
+    }
+    
     public function store(Request $request){
         $this->validate($request,[
            'content' => 'required|max:191',
